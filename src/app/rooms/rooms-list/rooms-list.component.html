@@ -1,0 +1,32 @@
+<p>rooms-list works!</p>
+    <p>{{title}}</p>
+    <table class="table">
+        <tr>
+            <th>Index</th>
+            <th>Even/Odd</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Room Price</th>
+            <th>Room Amenities</th>
+            <th>checkinTime</th>
+            <th>Rating</th>
+            <th>Select Room</th>
+    
+        </tr>
+        <!-- <tr [ngClass]="e ? 'even':'odd'"
+            *ngFor="let room of rooms | slice:0:3; let e = even; let o = odd; let i = index"> -->
+                    <tr [ngClass]="e ? 'even':'odd'" *ngFor="let room of rooms; let e = even; let o = odd; let i = index">
+
+            <td>{{i+1 | percent}}</td>
+            <td>{{e ? 'even' : 'odd'}}</td>
+            <td>{{room.roomNumber}}</td>
+            <td>{{room.roomType}}</td>
+            <td>{{room.price | currency:'INR'}}</td>
+            <td>{{room.amenities | titlecase}}</td>
+            <td>{{room.checkinTime | date:'short'}}</td>
+            <td>{{room.rating | number : '1.0-0' : 'en-us'}}</td>
+            <td>
+            <button class="btn btn-primary" (click)="selectRoom(room)">Book Now</button>
+            </td>
+        </tr>
+    </table>

@@ -1,0 +1,40 @@
+<!-- interpolation -->
+<hinv-header></hinv-header>
+<!-- <hinv-header></hinv-header>
+<hinv-header></hinv-header> -->
+<!-- {{rooms$ | async | json}} -->
+<p>Welcome to {{hotelName ? hotelName : "no hotels"}}</p>
+<!-- property binding -->
+<div [hidden]="hideRooms">
+    Number of Rooms:
+<div [ngStyle]="{color:rooms.availableRooms ? 'coral' : 'red'}" [innerText]="numberOfRooms"></div>
+
+</div>
+
+<!-- {{roomList | json}} -->
+
+<!-- null collison -->
+<!-- {{rooms.availableRooms ?? 'No Rooms'}} -->
+
+<div>
+    <button (click)="addRoom()">Add Room</button>
+</div>
+
+<!-- built-in-directives -->
+<div *ngIf="selectedRoom">
+    <p>Selected Room: {{selectedRoom.roomType}}</p>
+</div>
+<p>{{getError$ | async}}</p>
+<div *ngIf="rooms$ | async as rooms">
+    <!-- <hinv-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></hinv-rooms-list> -->
+    <hinv-rooms-list [rooms]="rooms" [title]="title"
+        (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
+</div>
+
+
+<!-- event binding -->
+<button (click)="toggle()">Toggle</button>
+<button (click)="editRoom()" >Edit Room</button>
+<button (click)="deleteRoom()">Delete Room</button>
+
+<h1>{{totalBytes}} Loaded</h1>
