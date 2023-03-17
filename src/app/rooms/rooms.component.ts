@@ -17,6 +17,7 @@ import {
   Subject,
   Subscribable,
   Subscription,
+  map,
 } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
 import { Room, RoomList } from './rooms';
@@ -69,7 +70,10 @@ export class RoomsComponent
       rating: 4.2,
     };
     // this.roomList = [...this.roomList, room];
-    this.roomsService.addRoom(room).subscribe((data) => (this.roomList = data));
+    this.roomsService.addRoom(room).subscribe((data) => {
+      console.log(data);
+      this.roomList = data;
+    });
   }
   editRoom() {
     const room: RoomList = {
@@ -96,6 +100,8 @@ export class RoomsComponent
 
   @ViewChildren(HeaderComponent)
   headerChildrenComponent!: QueryList<HeaderComponent>;
+
+  roomCount$ = this.roomsService.getRooms$.pipe(map((rooms) => rooms.length));
 
   ngDoCheck(): void {
     console.log('on check is called');
@@ -145,13 +151,13 @@ export class RoomsComponent
       complete: () => console.log('completed'),
       error: (err) => console.log(err),
     });
-    // this.subscription = this.roomsService.getRooms$.subscribe((rooms) => {
-    //   this.roomList = rooms;
-    // });
+    this.subscription = this.roomsService.getRooms$.subscribe((rooms) => {
+      this.roomList = rooms;
+    });
   }
   ngOnDestroy() {
-    // if (this.subscription) {
-    //   this.subscription.unsubscribe();
-    // }
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

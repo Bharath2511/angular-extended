@@ -25,10 +25,13 @@
     <p>Selected Room: {{selectedRoom.roomType}}</p>
 </div>
 <p>{{getError$ | async}}</p>
-<div *ngIf="rooms$ | async as rooms">
-    <!-- <hinv-rooms-list [rooms]="roomList" [title]="title" (selectedRoom)="selectRoom($event)"></hinv-rooms-list> -->
-    <hinv-rooms-list [rooms]="rooms" [title]="title"
-        (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
+<h1>Number of rooms: {{roomCount$ | async}}</h1>
+<!-- {{rooms$ | async | json}} -->
+<!-- <div *ngIf="rooms$ | async as rooms"> -->
+    <div *ngIf="rooms$ | async as rooms">
+    <hinv-rooms-list [rooms]="rooms" [title]="title" (selectedRoom)="selectRoom($event)"></hinv-rooms-list>
+    <!-- <hinv-rooms-list [rooms]="rooms" [title]="title"
+        (selectedRoom)="selectRoom($event)"></hinv-rooms-list> -->
 </div>
 
 

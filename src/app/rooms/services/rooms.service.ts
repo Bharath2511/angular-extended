@@ -1,4 +1,4 @@
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { shareReplay } from 'rxjs';
 import { AppConfig } from '../../AppConfig/appconfig.interface';
@@ -21,7 +21,7 @@ export class RoomsService {
   }
 
   getRooms() {
-    return this.http.get<RoomList[]>('/api/rooms');
+    return this.http.get<RoomList[]>('/api/rooms', {});
   }
   addRoom(room: RoomList) {
     return this.http.post<RoomList[]>('/api/rooms', room);

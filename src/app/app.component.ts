@@ -10,6 +10,7 @@ import {
 
 import { RoomsComponent } from './rooms/rooms.component';
 import { LocalStorageToken } from '../localstorage.token';
+import { InitService } from './Init.service';
 
 @Component({
   selector: 'hinv-root',
@@ -28,7 +29,12 @@ export class AppComponent implements AfterViewInit, OnInit {
   //   componentRef.instance.numberOfRooms = 50;
   // }
   @ViewChild('name', { static: true }) name!: ElementRef;
-  constructor(@Inject(LocalStorageToken) private localStorage: Storage) {}
+  constructor(
+    @Inject(LocalStorageToken) private localStorage: Storage,
+    private initService: InitService
+  ) {
+    console.log(initService.config);
+  }
   ngOnInit() {
     this.name.nativeElement.innerText = 'Restaurant';
     this.localStorage.setItem('name', 'Hilton Hotel');
