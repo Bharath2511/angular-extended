@@ -7,18 +7,18 @@
 <div *ngIf="successMessage !== ''" class="alert alert-success">
     {{successMessage}}
 </div>
-<form #roomsForm="ngForm" (ngSubmit)="AddRoom()">
+<form #roomsForm="ngForm" (ngSubmit)="AddRoom(roomsForm)">
     <div class="form-group">
         <input required class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" placeholder="Room Type"  />
     </div>
     <div class="form-group">
-        <input #roomAmenities="ngModel" required minlength="5" maxlength="20" class="form-control" type="text" email name="amenities" [(ngModel)]="room.amenities" placeholder="Amenities" />
-        <div class="alert alert-danger" *ngIf="roomAmenities.errors?.['minlength']">
-            Amenities should be min 5 chars
+        <input #roomamenities="ngModel" required minlength="5" maxlength="20" class="form-control" type="text" name="amenities" [(ngModel)]="room.amenities" placeholder="Amenities" />
+        <div class="alert alert-danger" *ngIf="roomamenities.dirty && roomamenities.errors?.['required']">
+            Please provide amenities
         </div>
-        <div>
+        <!-- <div>
             {{roomAmenities?.errors | json}}
-        </div>
+        </div> -->
     </div>
     <div class="form-group">
         <input required class="form-control" type="number" name="price" [(ngModel)]="room.price" placeholder="Room Price" />
@@ -27,10 +27,10 @@
         <input required class="form-control" type="text" name="photos" [(ngModel)]="room.photos" placeholder="Photos (Provide Link)" />
     </div>
     <div class="form-group">
-        <input required class="form-control" type="datetime" name="Check-in Time" [(ngModel)]="room.checkinTime" placeholder="Check-in Time" />
+        <input required class="form-control" type="datetime" name="checkinTime" [(ngModel)]="room.checkinTime" placeholder="Check-in Time" />
     </div>
     <div class="form-group">
-        <input required class="form-control" type="datetime" name="Check-out Time" [(ngModel)]="room.checkoutTime" placeholder="Check-out Time" />
+        <input required class="form-control" type="datetime" name="checkoutTime" [(ngModel)]="room.checkoutTime" placeholder="Check-out Time" />
     </div>
     <div class="form-group">
         <input min="1" max="5" #roomRating="ngModel" required class="form-control" type="number" name="rating" [(ngModel)]="room.rating" placeholder="Rating" />
