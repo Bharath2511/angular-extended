@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { HoverDirective } from './hover.directive';
 import { EmailvalidatorDirective } from './emailValidator/emailvalidator.directive';
+import { RouteConfigToken } from './services/routeConfig.service';
 // import { RoomsModule } from './rooms/rooms.module';
 
 function initFactory(initService: InitService) {
@@ -65,6 +66,7 @@ function initFactory(initService: InitService) {
   providers: [
     { provide: APP_SERVICE_CONFIG, useValue: APP_CONFIG },
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    { provide: RouteConfigToken, useValue: { title: 'Home' } },
     {
       provide: APP_INITIALIZER,
       useFactory: initFactory,

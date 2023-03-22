@@ -20,6 +20,7 @@ import {
   map,
 } from 'rxjs';
 import { HeaderComponent } from '../header/header.component';
+import { ConfigService } from '../services/config.service';
 import { Room, RoomList } from './rooms';
 import { RoomsService } from './services/rooms.service';
 
@@ -93,7 +94,10 @@ export class RoomsComponent
   deleteRoom() {
     this.roomsService.delete('3').subscribe((data) => (this.roomList = data));
   }
-  constructor(@SkipSelf() private roomsService: RoomsService) {}
+  constructor(
+    @SkipSelf() private roomsService: RoomsService,
+    private configService: ConfigService
+  ) {}
 
   @ViewChild(HeaderComponent)
   headerComponent!: HeaderComponent;

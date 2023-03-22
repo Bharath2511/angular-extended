@@ -11,6 +11,7 @@ import {
 import { RoomsComponent } from './rooms/rooms.component';
 import { LocalStorageToken } from '../localstorage.token';
 import { InitService } from './Init.service';
+import { ConfigService } from './services/config.service';
 
 @Component({
   selector: 'hinv-root',
@@ -31,7 +32,8 @@ export class AppComponent implements AfterViewInit, OnInit {
   @ViewChild('name', { static: true }) name!: ElementRef;
   constructor(
     @Inject(LocalStorageToken) private localStorage: Storage,
-    private initService: InitService
+    private initService: InitService,
+    private configService: ConfigService
   ) {
     console.log(initService.config);
   }
