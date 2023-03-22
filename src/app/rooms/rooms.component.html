@@ -17,7 +17,7 @@
 <!-- {{rooms.availableRooms ?? 'No Rooms'}} -->
 
 <div>
-    <button (click)="addRoom()">Add Room</button>
+    <button routerLink="add">Add Room</button>
 </div>
 
 <!-- built-in-directives -->
@@ -41,3 +41,4 @@
 <button (click)="deleteRoom()">Delete Room</button>
 
 <h1>{{totalBytes}} Loaded</h1>
+<router-outlet></router-outlet>
