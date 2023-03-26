@@ -9,6 +9,7 @@ import {
 import { mergeMap } from 'rxjs/operators';
 import { ConfigService } from '../services/config.service';
 import { BookingService } from './booking.service';
+import { CustomValidator } from './validators/custom-validator';
 
 @Component({
   selector: 'hinv-booking',
@@ -47,10 +48,18 @@ export class BookingComponent implements OnInit {
           '',
           {
             updateOn: 'blur',
-            validators: [Validators.required, Validators.email],
+            validators: [Validators.required],
           },
         ],
-        guestName: ['', [Validators.required, Validators.minLength(5)]],
+        guestName: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(5),
+            CustomValidator.ValidateName,
+            CustomValidator.ValidateSpecialChar('*'),
+          ],
+        ],
         guestAddress: [''],
         address: this.fb.group({
           addressLine1: ['', { validators: [Validators.required] }],
@@ -64,8 +73,8 @@ export class BookingComponent implements OnInit {
         // guestCount: [''],
         // guestList: [],
         tnc: new FormControl(false, { validators: [Validators.requiredTrue] }),
-      }
-      // { updateOn: 'blur' }
+      },
+      { updateOn: 'blur', validators: [CustomValidator.validateDate] }
     );
   }
 
@@ -114,6 +123,7 @@ export class BookingComponent implements OnInit {
       // guestList: [],
       tnc: false,
     });
+    this.bookingForm.reset();
   }
   addGuestControl() {
     return this.fb.group({
@@ -149,7 +159,7 @@ export class BookingComponent implements OnInit {
     this.bookingForm.patchValue({
       roomId: '2',
       guestEmail: 'test@gmail.com',
-      checkinDate: new Date('10-Feb-2020'),
+      checkinDate: '',
       checkoutDate: '',
       bookingStatus: '',
       bookingAmount: '',
