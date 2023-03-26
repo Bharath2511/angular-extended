@@ -9,7 +9,7 @@
 </div>
 <form #roomsForm="ngForm" (ngSubmit)="AddRoom(roomsForm)">
     <div class="form-group">
-        <input required class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" placeholder="Room Type"  />
+        <input required class="form-control" type="text" name="roomType" [(ngModel)]="room.roomType" [ngModelOptions]="{updateOn:'blur'}" placeholder="Room Type"  />
     </div>
     <div class="form-group">
         <input #roomamenities="ngModel" required minlength="5" maxlength="20" class="form-control" type="text" name="amenities" [(ngModel)]="room.amenities" placeholder="Amenities" />
